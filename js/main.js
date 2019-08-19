@@ -160,15 +160,20 @@
   $('.get-course-btn').on('click', function(){
     $('#getCourse .course-name').text($(this).closest('.feature-info h4').contents().get(0).nodeValue);
     $('[name="course_id"]').val($(this).data("id"));  
-    $('#getCourse').modal("show")
+   
+    $('#getCourseForm')[0].reset();
+    $('#getCourse').modal("show");
   });
 
   $('#getCourseForm').on('submit', function(e){
-    e.preventDefault();
-    var data = $('#getCourseForm').serializeArray();   
-    console.log(data);
-    $('#getCourseForm').hide();
-    $('.course-success ').show();
+    e.preventDefault();   
+    if(this.checkValidity()){
+      var data = $('#getCourseForm').serializeArray();   
+      console.log(data);
+      $('#getCourseForm').hide();
+      $('.course-success ').show();
+    }
+    
   });
 
   $('#getCourse').on('hide.bs.modal', function (e) {
